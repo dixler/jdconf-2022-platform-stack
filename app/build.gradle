@@ -1,0 +1,28 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    maven {
+        url("https://maven-central.storage-download.googleapis.com/maven2/")
+    }
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // This is the Pulumi SDK
+    implementation 'com.pulumi:pulumi:(,1.0]'
+    // These are provider SDKs(Providers are Cloud providers/Platforms)
+    // We autogenerate them from schemas that the provider releases
+    implementation 'com.pulumi:azure-native:1.56.0'
+    implementation 'com.pulumi:kubernetes:3.15.1'
+}
+
+// Pulumi Gradle integration.
+// For more details check https://www.pulumi.com/docs/intro/languages/java/
+application {
+    mainClass = project.hasProperty("mainClass")
+            ? project.getProperty("mainClass")
+            : 'myproject.App'
+}
